@@ -91,43 +91,6 @@ const siteData = {
       }
     },
 
-    // --- 互动作品（可交互的实时渲染，点卡片进独立页） ---
-    interactive: {
-      title: '互 动',
-      titleEn: 'Interactive',
-      items: [
-        {
-          index: '壹',
-          seal: '燈',
-          name: '灯塔 · 风暴',
-          desc: '纯代码生成的像素动画：软件逐像素渲染 + Bayer 有序抖动，红白灯塔在冷风暴里扫出光束。',
-          bgImage: 'art-lighthouse.jpg',
-          url: 'lighthouse-storm.html',
-          meta: [
-            { text: '可交互', status: true },
-            { text: 'Canvas · 像素艺术', status: false }
-          ],
-          detail: `
-            <p>一个<strong>会动的像素画</strong>：整幅画面没有一个图片素材，全部由代码逐像素画出来，在480×270 的内部缓冲里渲染，再用整数倍最近邻放大铺满屏幕。</p>
-            <h4>像素质感从哪来</h4>
-            <p>Bayer 4×4 <strong>有序抖动</strong>。渐变本身只有 9 级色阶，靠抖动矩阵在相邻两色之间做空间混搭，于是得到远多于实际色数的层次——这是像素质感的根基，不是滤镜。</p>
-            <h4>画了什么</h4>
-            <ul>
-              <li><strong>风暴云</strong>：团块状密度场累积，每朵云由多个椭圆叠出蓬松体积，边缘用噪声打碎；</li>
-              <li><strong>旋转光束</strong>：绕垂直轴转一圈，投影到屏幕做透视缩短，三段式（核心亮线 + 体积光锥 + 远端衰减）；</li>
-              <li><strong>闪电</strong>：主干强制细长竖直（横向跨度 ≤26px）+ 分支 + 多脉冲频闪，不是劈一次就完；</li>
-              <li><strong>冷暖对比</strong>：全场冷蓝，唯一暖色是灯室与塔窗—— 风暴越冷，那点暖光越像锚。</li>
-            </ul>
-            <h4>一个有意思的技术坑</h4>
-            <p>竖屏时如果按常规「铺满裁切」，画面要放大到 7 倍，480宽里只剩 130px 可见，光束和闪电全被裁掉。改法是让<strong>内部缓冲高度自适应</strong>——竖屏补天补海，而不是裁两侧；但高度有性能红线（纯软件渲染，成本随像素量线性涨），超过阈值宁可裁一点海面也不能让帧率掉到卡。</p>
-            <p class="tip-hint">按 <strong>H</strong> 键可隐藏片名，方便录屏。</p>
-            <h4>直接打开</h4>
-            <p><a href="lighthouse-storm.html" target="_blank" rel="noopener">进入灯塔 · 风暴 ↗</a></p>
-          `
-        }
-      ]
-    },
-
     // --- 绘画 ---
     painting: {
       title: '绘 画',
@@ -179,26 +142,24 @@ const siteData = {
       items: [
         {
           index: '壹',
-          seal: '评',
-          name: '评论 + 散文',
-          desc: '评论与散文，兼及房地产与存量时代观察，把所思所想写成普通人读得懂的文字。',
+          seal: '庄',
+          name: '读庄子安人生',
+          desc: '以庄子回应现代人的精神内耗，谈空船之喻与心物关系。公众号长期连载。',
           bgImage: 'art-cover-song.png',
-          url: 'https://mp.weixin.qq.com/s/jQJdKdAAeA9Kok5NXCFXrQ', // 微信公众号文章
           meta: [
             { text: '连载中', status: true },
-            { text: '评论 · 散文 · 地产', status: false }
+            { text: '微信公众号', status: false }
           ]
         },
         {
           index: '贰',
-          seal: '智',
-          name: 'AI coding & 具身智能',
-          desc: '聚焦 AI 编程与具身智能，追踪前沿产品与资讯，做业余而认真的观察。',
+          seal: '存',
+          name: 'kirin · 存量时代',
+          desc: '房地产与时代观察，把宏大的存量叙事写成普通人读得懂的文字。',
           bgImage: 'art-landscape.jpg',
-          url: 'https://mp.weixin.qq.com/s/9CAZnEs4X35bStiBhzcA3w', // 微信公众号文章
           meta: [
             { text: '连载中', status: true },
-            { text: 'AI 观察', status: false }
+            { text: '房地产观察', status: false }
           ]
         },
         {
@@ -207,7 +168,6 @@ const siteData = {
           name: '读书笔记',
           desc: '第一人称读葛兆光《中国思想史》、布迪厄《区隔》等，把古典与理论接到当下。',
           bgImage: 'art-song-tea.jpg',
-          url: 'https://mp.weixin.qq.com/s/8XhWFFKxfSDsIKlqW69s1Q', // 微信公众号文章
           meta: [
             { text: '不定期', status: false },
             { text: '思想史 · 社会学', status: false }
@@ -215,38 +175,13 @@ const siteData = {
         },
         {
           index: '肆',
-          seal: '物',
-          name: '科普 · 诺贝尔物理学奖',
-          desc: '2026 物理诺奖：哈尔岑用一立方千米南极冰造出中微子望远镜，给人类观察宇宙多添了一类"不拐弯的信使"。',
-          bgImage: 'art-lighthouse.jpg',
-          url: 'https://mp.weixin.qq.com/s/Hj5gvUI23uRi-fKFX7r_XQ',
+          seal: '智',
+          name: '便利店给机器人排了夜班',
+          desc: '香港三家便利店、丹麦一间超市，人形机器人正从演示走向真正的夜班——先接没人愿干的时段，而非一上来替代白天店员。',
+          bgImage: 'art-cover-song.png',
           meta: [
-            { text: '科普', status: true },
-            { text: '中微子 · 冰立方', status: false }
-          ]
-        },
-        {
-          index: '伍',
-          seal: '化',
-          name: '科普 · 诺贝尔化学奖',
-          desc: '2026 化学诺奖：卡甘与硖合让分子只生成一种镜像，从手性偏差到生命起源之谜都有落点。',
-          bgImage: 'art-chrysanthemum.jpg',
-          url: 'https://mp.weixin.qq.com/s/UTK2n2lGXQwwraDDiu5qVQ',
-          meta: [
-            { text: '科普', status: true },
-            { text: '手性 · 不对称合成', status: false }
-          ]
-        },
-        {
-          index: '陆',
-          seal: '文',
-          name: '科普 · 诺贝尔文学奖',
-          desc: '2026 文学诺奖：安妮·卡森把古希腊神话与诗歌改写成当代诗与散文，成为诺奖史上第19位女性得主。',
-          bgImage: 'art-landscape.jpg',
-          url: 'https://mp.weixin.qq.com/s/kmInJFVu-zQAPCEapxBR6A',
-          meta: [
-            { text: '科普', status: true },
-            { text: '安妮·卡森', status: false }
+            { text: '2026.10.12', status: true },
+            { text: '具身智能 · 观察', status: false }
           ]
         }
       ]
@@ -263,24 +198,10 @@ const siteData = {
           name: 'MVP Workbench',
           desc: '本地 AI 工作台：文本生成接 DeepSeek，图像生成接阶跃星辰，把想法就地做成能跑的东西。',
           bgImage: 'art-landscape.jpg',
-          url: '', // 填项目仓库/演示链接，留空则卡片不可点击
           meta: [
             { text: '运行中', status: true },
             { text: 'DeepSeek · 阶跃', status: false }
-          ],
-          detail: `
-            <p>本地个人 AI 工作台，把想法就地做成能跑的产品，常驻本机运行。</p>
-            <h4>它接的是什么</h4>
-            <p>文本生成接 <strong>DeepSeek</strong> API，图像生成评估接 <strong>阶跃星辰（StepFun）</strong>；底座是一套工作流 AI 工具（类 WorkBuddy / DeepSeek Harness），把对话、出图、写代码串成一条流水线。</p>
-            <h4>了解更多</h4>
-            <p>
-              <a href="https://platform.deepseek.com" target="_blank" rel="noopener">DeepSeek 开放平台 ↗</a><br>
-              <a href="https://platform.stepfun.com" target="_blank" rel="noopener">阶跃星辰 StepFun ↗</a><br>
-              <a href="https://www.workbuddy.cn" target="_blank" rel="noopener">WorkBuddy ↗</a>
-            </p>
-            <h4>一点提示</h4>
-            <p>DeepSeek 账号下两把 Key <strong>余额共享</strong>，欠费时切换无效，需先充值；阶跃 Key 放在 <code>~/.stepfun/api_key</code>，由服务端自动读取。</p>
-          `
+          ]
         },
         {
           index: '贰',
@@ -288,26 +209,22 @@ const siteData = {
           name: 'dp-collect',
           desc: '数据采集系统，DB + 在线表单双能力，从采集到落库一条线。',
           bgImage: 'art-song-tea.jpg',
-          url: '', // 填项目仓库/演示链接，留空则卡片不可点击
           meta: [
             { text: '建设中', status: true },
             { text: 'DB · 在线表单', status: false }
-          ],
-          detail: `
-            <p>数据采集系统，提供 <strong>DB + 在线表单</strong> 双能力，目标是把「人填 → 库存」这一步自动化，去掉人工搬运。</p>
-            <h4>实现路径（概念层，不绑平台）</h4>
-            <ul>
-              <li><strong>① 表单层</strong>：在线表单采集，浏览器填写即提交，无需本地安装；</li>
-              <li><strong>② 校验层</strong>：提交时做格式与必填校验，脏数据挡在入库前；</li>
-              <li><strong>③ 落库层</strong>：结构化写入数据库，自动建表或追加，字段可配置；</li>
-              <li><strong>④ 查询导出</strong>：按条件检索、导出，供后续分析复用。</li>
-            </ul>
-            <h4>怎么落地</h4>
-            <p>不必绑死某个平台——任何「带数据库能力的表单工作流」都能搭：可用 <a href="https://www.workbuddy.cn" target="_blank" rel="noopener">WorkBuddy</a> 的采集类技能快速起一个，也可自建前端表单 + 轻量数据库（如 SQLite / Postgres）。核心是把采集到落库做成一条线，而不是每次手动拷表。</p>
-            <h4>当前状态</h4>
-            <p>建设中——架构与目标已清晰，正逐步把各层打通。</p>
-          `
+          ]
         },
+        {
+          index: '叁',
+          seal: '訊',
+          name: 'AI 资讯流水线',
+          desc: '每日自动化产出聚焦 AI 编程与具身智能的资讯摘要，无人值守运行。',
+          bgImage: 'art-chrysanthemum.jpg',
+          meta: [
+            { text: '每日运行', status: true },
+            { text: '自动化 · AI', status: false }
+          ]
+        }
       ]
     }
   },
