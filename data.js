@@ -260,6 +260,18 @@ const siteData = {
             { text: '2026.10.12', status: true },
             { text: '具身智能 · 观察', status: false }
           ]
+        },
+        {
+          index: '捌',
+          seal: '經',
+          name: '科普 · 诺贝尔经济学奖',
+          desc: '2026 经济诺奖：霍尔与伍德福德为"熨平"经济波动重建微观地基——从每个家庭如何花钱，讲到央行如何管理预期。',
+          bgImage: 'art-plum-crane.jpg',
+          url: 'https://mp.weixin.qq.com/s/SnoyFIrTguXFwqqX8wRUWg',
+          meta: [
+            { text: '科普', status: true },
+            { text: '霍尔 · 伍德福德', status: false }
+          ]
         }
       ]
     },
