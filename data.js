@@ -124,6 +124,18 @@ const siteData = {
             <h4>直接打开</h4>
             <p><a href="lighthouse-storm.html" target="_blank" rel="noopener">进入灯塔 · 风暴 ↗</a></p>
           `
+        },
+        {
+          index: '貳',
+          seal: '讀',
+          name: '阅读探险',
+          desc: '为孩子做的游戏化阅读网页：4 大主题 20 篇文章，点亮星图、收集文体印章，让阅读变成一场探险。',
+          bgImage: 'art-chrysanthemum.jpg',
+          url: 'https://544649560-kirin.github.io/reading-quest/',
+          meta: [
+            { text: '可交互', status: true },
+            { text: '纯静态 · 离线可用', status: false }
+          ]
         }
       ]
     },
