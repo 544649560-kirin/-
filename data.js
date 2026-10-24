@@ -126,16 +126,32 @@ const siteData = {
           `
         },
         {
-          index: '貳',
-          seal: '讀',
-          name: '阅读探险',
-          desc: '为孩子做的游戏化阅读网页：4 大主题 20 篇文章，点亮星图、收集文体印章，让阅读变成一场探险。',
-          bgImage: 'art-chrysanthemum.jpg',
-          url: 'https://544649560-kirin.github.io/reading-quest/',
+          index: '贰',
+          seal: '皮',
+          name: '麒麟 · 手工皮具宣传页',
+          desc: '为手作皮具店主做的一页滚动故事：一条缝线从头缝到尾，讲十年手艺、头层牛皮，和一只卡包的诞生。',
+          bgImage: 'art-song-tea.jpg',
+          url: 'kirin-leather/',
           meta: [
-            { text: '可交互', status: true },
-            { text: '纯静态 · 离线可用', status: false }
-          ]
+            { text: '单页 H5', status: true },
+            { text: '滚动叙事 · 缝线动效', status: false }
+          ],
+          detail: `
+            <p>给手工皮具店主做的宣传页，只做展示导流、不能下单。整页围绕一句话展开：<strong>每只卡包，麒麟亲手缝</strong>。</p>
+            <h4>怎么讲的</h4>
+            <ul>
+              <li><strong>一条线</strong>：缝线从首屏开始，随滚动一针一针缝完整页，针眼跟着走——手艺这件事不用嘴说，让线去说；</li>
+              <li><strong>十年</strong>：进入视口时数字从 0 数到 10，讲的是"同一双手"；</li>
+              <li><strong>三道工序</strong>：裁皮、打孔、缝线，各配一张图；</li>
+              <li><strong>签名收尾</strong>：页尾留给二维码与进店入口。</li>
+            </ul>
+            <h4>技术</h4>
+            <p>单文件 HTML + 本地 GSAP / ScrollTrigger，滚动驱动 SVG 路径绘制与针眼位移；动效尊重系统的"减弱动态效果"设置，关掉时直接呈现最终态。字体走 CDN，加载失败自动回退系统中文字体，微信里也能看。</p>
+            <h4>当前状态</h4>
+            <p>页面内的商品图为<strong>示意占位图</strong>，正式上线前会逐张换成店主实拍；二维码与进店链接同为占位。</p>
+            <h4>直接打开</h4>
+            <p><a href="kirin-leather/" target="_blank" rel="noopener">进入宣传页 ↗</a></p>
+          `
         }
       ]
     },
