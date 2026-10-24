@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>麒麟 Kirin · 每只卡包，亲手缝</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5/900.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/barlow-condensed@5/600.css">
+<style>
+:root{
+  --bg:#f4efe6; --ink:#2b2118; --accent:#3a5a78; --muted:#7a6a55; --line:#d8cdbb;
+  --gap-lg:96px; --gap-md:56px; --gap-sm:28px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans SC",-apple-system,"PingFang SC",sans-serif;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#page{position:relative;max-width:560px;margin:0 auto}
+@media (min-width:1200px){
+  #page{max-width:720px}
+  body{font-size:17px}
+  .sec-title{font-size:36px}
+  .hero h1{font-size:66px}
+  .years .num{font-size:160px}
+  .maker blockquote{font-size:26px}
+}
+
+/* ---------- 一条线 ---------- */
+#thread{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
+#thread .stitch{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-dasharray:7 9}
+#thread .needle{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+#thread .needle-eye{fill:var(--bg);stroke:var(--ink);stroke-width:2}
+.z{position:relative;z-index:2}
+
+/* 素雅占位框：替换 AI 占位图，上线前塞真照片 */
+.ph-box{position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#efe7d8,#e6dcc7);border:1px solid var(--line);color:var(--muted);letter-spacing:1px;overflow:hidden;text-align:center}
+.ph-box::after{content:"";position:absolute;inset:9px;border:1px dashed rgba(122,106,85,.38);border-radius:inherit;pointer-events:none}
+.ph-box i{position:relative;font-style:normal;font-size:13px;padding:0 10px;line-height:1.45}
+/* 首屏占位框：一层牛皮颗粒底，别是一块死板的纯色 */
+.hero-media .ph-box{background-color:#e3d8c2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23g)' opacity='0.26'/%3E%3C/svg%3E")}
+.hero-media .ph-box i{color:#3f382c}
+
+/* ---------- 首屏 ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column}
+.topbar{padding:18px 24px 14px;font-size:14px;letter-spacing:1.5px;font-weight:700;color:var(--ink);opacity:.85}
+.hero-media{flex:1 1 auto;min-height:52vh;position:relative;min-width:0}
+.hero-media img,.hero-media .ph-box{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;
+  -webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,#000 78%,transparent 100%)}
+.hero-text{padding:0 24px 8px}
+.hero .ident{font-size:14px;color:var(--muted);letter-spacing:1px;margin-top:10px}
+.hero h1{font-size:clamp(44px,12.8vw,60px);font-weight:900;line-height:1.14;letter-spacing:.01em;margin-top:6px;word-break:keep-all}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln i{display:block;font-style:normal}
+.hero .lead{margin-top:14px;color:var(--muted)}
+@media (min-width:900px){
+  .hero-media{margin-inline:calc(50% - 50vw)}
+}
+@media (min-width:1200px){
+  section{padding:0 32px}
+  .steps{display:grid;grid-template-columns:1fr 320px;column-gap:56px}
+  .steps .sec-title{grid-column:1/-1}
+  .steps .step{grid-column:1}
+  .steps .tools{grid-column:2;grid-row:2/5;margin:0;align-self:start}
+  .carry{display:grid;grid-template-columns:1fr 320px;column-gap:56px;align-items:start}
+  .carry .sec-title,.carry .body{grid-column:1}
+  .carry img,.carry .ph-box{grid-column:2;grid-row:1/3;margin:0}
+  .maker{display:grid;grid-template-columns:1fr 320px;column-gap:56px;align-items:start}
+  .maker .sec-title,.maker blockquote,.maker #sig{grid-column:1}
+  .maker .hands{grid-column:2;grid-row:2/4;margin:0}
+}
+
+/* ---------- 区块 ---------- */
+section{padding:0 24px;margin-top:var(--gap-lg)}
+.sec-title{font-size:30px;font-weight:900;line-height:1.3}
+.kicker-num{font-family:"Barlow Condensed",sans-serif;font-weight:600}
+p.body{margin-top:14px;color:#4a4034}
+
+/* 十年 */
+.years{margin-top:var(--gap-lg)}
+.years .num{display:flex;align-items:flex-start;font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:132px;line-height:.9;color:var(--ink)}
+.years .num small{font-size:22px;font-family:"Noto Sans SC",sans-serif;font-weight:900;color:var(--muted);margin-left:8px;margin-top:16px}
+.years .cap{margin-top:10px;font-size:22px;font-weight:900}
+.years p{margin-top:10px;color:#4a4034}
+
+/* 工序 */
+.steps{margin-top:var(--gap-lg)}
+.step{display:flex;gap:16px;margin-top:var(--gap-md);align-items:flex-start}
+.step .ph-box{width:80px;height:80px;flex:none;border-radius:10px;margin-top:4px}
+.step .ph-box::after{inset:6px}
+.step .ph-box i{font-size:13px;padding:0;letter-spacing:0;line-height:1.3}
+.step .no{display:block;font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:18px;color:var(--muted)}
+.step h3{font-size:19px;font-weight:900;margin-top:2px}
+.step p{color:#4a4034;margin-top:4px}
+.steps .tools{margin-top:var(--gap-md)}
+.steps .tools img,.steps .tools .ph-box{width:100%;height:auto;display:block;border-radius:10px;min-height:190px}
+
+/* 贴身 */
+.carry img,.carry .ph-box{width:100%;height:auto;display:block;border-radius:10px;margin-top:var(--gap-md);min-height:220px}
+
+/* 店主 */
+.maker blockquote{margin-top:var(--gap-md);font-size:22px;font-weight:900;line-height:1.6}
+.maker .hands{margin-top:var(--gap-md)}
+.maker .hands img,.maker .hands .ph-box{width:100%;height:auto;display:block;border-radius:10px;min-height:220px}
+.maker .sig{margin-top:var(--gap-sm);font-size:18px;font-weight:900;display:inline-block}
+.maker .sig small{font-weight:400;color:var(--muted);margin-left:8px;font-size:13px;letter-spacing:2px}
+.sig-line{display:block;width:56px;height:2.5px;background:var(--accent);border-radius:2px;transform-origin:left center;margin-top:8px}
+
+/* 页尾 */
+footer{padding:var(--gap-lg) 24px 64px;margin-top:0}
+@media (min-width:1200px){footer{padding-left:32px;padding-right:32px}}
+.foot-cta{font-size:20px;font-weight:900}
+.foot-note{margin-top:8px;color:var(--muted);font-size:14px}
+.foot-row{display:flex;align-items:center;gap:20px;margin-top:var(--gap-sm)}
+.dl-link{display:inline-block;background:var(--ink);color:#f7f2e9;font-weight:900;font-size:16px;padding:13px 30px;border-radius:10px;text-decoration:none;transition:transform .15s ease,opacity .15s ease}
+.dl-link:active{transform:scale(.96);opacity:.85}
+.foot-hint{margin-top:14px;font-size:13px;color:var(--muted)}
+.foot-fine{margin-top:var(--gap-sm);font-size:13px;color:var(--muted)}
+/* 各区块的 display:block 会盖掉占位框的 flex，这里统一抢回来（须放在覆盖规则之后） */
+.hero-media .ph-box,.steps .tools .ph-box,.carry .ph-box,.maker .hands .ph-box{display:flex}
+/* 线从文字底下过：正文块垫一层底色，保证可读 */
+.step .tx{position:relative;background:var(--bg)}
+</style>
+</head>
+<body>
+<div id="page">
+
+  <svg id="thread" aria-hidden="true">
+    <defs>
+      <clipPath id="reveal"><rect id="revealRect" x="0" y="0" width="4000" height="0"/></clipPath>
+    </defs>
+    <g clip-path="url(#reveal)">
+      <path id="stitch" class="stitch" d=""/>
+    </g>
+    <g id="needle" style="visibility:hidden"><g transform="translate(0,-12)">
+      <line class="needle" x1="6" y1="0" x2="34" y2="0"/>
+      <circle class="needle-eye" cx="10" cy="0" r="3"/>
+    </g></g>
+  </svg>
+
+  <header class="hero z">
+    <div class="topbar">麒麟 KIRIN · 手工皮具</div>
+    <div class="hero-media" id="heroMedia">
+      <div class="ph-box" id="heroPh"><i>实拍图待替换<br>首屏针脚特写</i></div>
+    </div>
+    <div class="hero-text" data-th="0.02,1.35">
+      <div class="ident">头层牛皮 · 手缝卡包</div>
+      <h1><span class="ln"><i>每只卡包，</i></span><span class="ln"><i>麒麟亲手缝</i></span></h1>
+      <p class="lead">一根线，从下料缝到收尾，都过同一双手。</p>
+    </div>
+  </header>
+
+  <section class="years z" data-th="0.02,0.25">
+    <div class="num"><span id="numVal">0</span><small>年</small></div>
+    <div class="cap">同一双手</div>
+    <p>这双手做了十年皮具。针脚不是设计出来的，是一针一针练出来的。</p>
+  </section>
+
+  <section class="steps z" data-th="0.015,0.12">
+    <h2 class="sec-title">一只卡包的诞生</h2>
+    <div class="step">
+      <div class="ph-box"><i>实拍<br>待换</i></div>
+      <div class="tx"><span class="no">01</span><h3>裁皮</h3><p>头层牛皮按版型下料。皮面有伤的料，直接不用。</p></div>
+    </div>
+    <div class="step">
+      <div class="ph-box"><i>实拍<br>待换</i></div>
+      <div class="tx"><span class="no">02</span><h3>打孔</h3><p>先扎孔、再走线。孔距凭手感——十年练出来的那个手感。</p></div>
+    </div>
+    <div class="step">
+      <div class="ph-box"><i>实拍<br>待换</i></div>
+      <div class="tx"><span class="no">03</span><h3>缝线</h3><p>一根蜡线缝到收尾，收针藏在皮料里，正面看不见线头。</p></div>
+    </div>
+    <div class="tools"><div class="ph-box"><i>实拍图待替换<br>工具台 · 裁皮刀 / 锥子 / 蜡线</i></div></div>
+  </section>
+
+  <section class="carry z" data-th="0.97,0.75">
+    <h2 class="sec-title">天天贴身的那件东西</h2>
+    <p class="body">装卡、塞口袋、天天被手摸。头层牛皮用久了颜色会变深，越用越顺眼。手缝的针脚，两只不会完全一样——后缝的那只，手更稳。</p>
+    <div class="ph-box" id="carryImg"><i>实拍图待替换<br>卡包插卡 · 装在口袋里</i></div>
+  </section>
+
+  <section class="maker z" data-th="0.02,0.2">
+    <h2 class="sec-title">缝它的人</h2>
+    <blockquote>“我叫麒麟。这页里的每一只卡包，都是我自己下料、自己缝的。急不来，也不急。”</blockquote>
+    <div class="hands"><div class="ph-box"><i>实拍图待替换<br>缝制的手</i></div></div>
+    <div id="sig" style="margin-top:var(--gap-sm)">
+      <span class="sig">麒麟<small>KIRIN</small></span>
+      <span class="sig-line" id="sigLine"></span>
+    </div>
+  </section>
+
+  <footer class="z" data-th="0.02,0.6">
+    <div class="foot-cta">看上哪只，进店挑；<br>或者直接找我，说说你想要的样子。</div>
+    <p class="foot-note">每只都过我的手，急不来。想要什么样的，先说——下料之前，都来得及改。</p>
+    <div class="foot-row">
+      <div class="dl-qr" id="qr" data-th="-0.12,0.5"></div>
+      <a class="dl-link" role="link">进店看看</a>
+    </div>
+    <p class="foot-hint">长按识别二维码加店主微信，或点按钮进店。</p>
+    <p class="foot-fine">本页仅作展示，购买请进店或联系店主。</p>
+  </footer>
+
+</div>
+
+<script src="kit/daoliu.js" data-shop="麒麟 Kirin 手工皮具"></script>
+<script src="kit/gsap.min.js"></script>
+<script src="kit/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var poster = document.documentElement.classList.contains('poster');
+  var page = document.getElementById('page');
+  var svg = document.getElementById('thread');
+  var path = document.getElementById('stitch');
+  var rect = document.getElementById('revealRect');
+  var needle = document.getElementById('needle');
+  var hasGsap = !!(window.gsap && window.ScrollTrigger);
+
+  /* ---------- 一条线：锚点 -> 平滑路径 ---------- */
+  var H = 0, pathLen = 0;
+  function buildThread(){
+    var pr = page.getBoundingClientRect();
+    var pageTop = pr.top + window.scrollY;
+    var pts = [];
+    page.querySelectorAll('[data-th]').forEach(function(el){
+      var f = el.getAttribute('data-th').split(',');
+      var r = el.getBoundingClientRect();
+      pts.push([r.left - pr.left + r.width * parseFloat(f[0]),
+                r.top + window.scrollY - pageTop + r.height * parseFloat(f[1])]);
+    });
+    if (pts.length < 2) return;
+    H = pr.height;
+    svg.setAttribute('viewBox', '0 0 ' + pr.width + ' ' + H);
+    svg.setAttribute('width', pr.width);
+    svg.style.height = H + 'px';
+    rect.setAttribute('width', pr.width);
+    rect.setAttribute('height', H);
+    var d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+    for (var i = 0; i < pts.length - 1; i++){
+      var p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
+      var c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
+      var c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
+      d += 'C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) + ' ' + p2[0].toFixed(1) + ' ' + p2[1].toFixed(1);
+    }
+    path.setAttribute('d', d);
+    pathLen = path.getTotalLength();
+  }
+  function setReveal(p){
+    rect.setAttribute('height', Math.max(0, Math.min(1, p)) * H);
+    if (pathLen){
+      var pt = path.getPointAtLength(Math.min(1, p) * pathLen);
+      var pt2 = path.getPointAtLength(Math.max(0, Math.min(1, p) * pathLen - 8));
+      var ang = Math.atan2(pt.y - pt2.y, pt.x - pt2.x) * 180 / Math.PI;
+      needle.setAttribute('transform', 'translate(' + pt.x + ',' + pt.y + ') rotate(' + ang + ')');
+      needle.style.visibility = (p > 0.001 && p < 0.999) ? 'visible' : 'hidden';
+    }
+  }
+
+  /* 图片加载会改变页面高度，加载完重建路径 */
+  function watchImages(){
+    page.querySelectorAll('img').forEach(function(img){
+      if (!img.complete){
+        img.addEventListener('load', function(){
+          buildThread();
+          if (hasGsap && window.ScrollTrigger) ScrollTrigger.refresh();
+          if (poster) setReveal(1);
+        });
+      }
+    });
+  }
+
+  /* 首屏主图槽：把实拍放进 img/hero-stitch.(jpg/jpeg/png/webp) 就自动显示，没有就保持占位框 */
+  function heroSlot(){
+    var box = document.getElementById('heroMedia');
+    if (!box) return;
+    var names = ['img/hero-stitch.jpg','img/hero-stitch.jpeg','img/hero-stitch.png','img/hero-stitch.webp'];
+    var i = 0;
+    (function next(){
+      if (i >= names.length) return;
+      var src = names[i++];
+      var probe = new Image();
+      probe.onload = function(){
+        var el = document.createElement('img');
+        el.src = src;
+        el.alt = '手缝针脚特写（示意占位图，上线前须换实拍）';
+        box.appendChild(el);
+        var ph = document.getElementById('heroPh');
+        if (ph) ph.parentNode.removeChild(ph);
+        buildThread();
+        if (hasGsap && window.ScrollTrigger) ScrollTrigger.refresh();
+      };
+      probe.onerror = next;
+      probe.src = src;
+    })();
+  }
+
+  function init(){
+    buildThread();
+    heroSlot();
+    watchImages();
+    if (poster || !hasGsap){
+      document.getElementById('numVal').textContent = '10';
+      document.getElementById('sigLine').style.transform = 'none';
+      setReveal(1);
+      needle.style.visibility = 'hidden';
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+    var mm = gsap.matchMedia();
+
+    mm.add('(prefers-reduced-motion: reduce)', function(){
+      document.getElementById('numVal').textContent = '10';
+      document.getElementById('sigLine').style.transform = 'none';
+      setReveal(1);
+      needle.style.visibility = 'hidden';
+    });
+
+    mm.add('(prefers-reduced-motion: no-preference)', function(){
+      // 跟着滚动走的一段：线从首屏缝到页尾，针在前面走
+      ScrollTrigger.create({
+        trigger: page, start: 'top top', end: 'bottom bottom', scrub: 0.6,
+        onUpdate: function(self){ setReveal(self.progress); }
+      });
+      setReveal(0);
+
+      // 首屏进场：像起针
+      gsap.timeline({ delay: 0.15 })
+        .from('.hero h1 .ln i', { yPercent: 110, duration: 0.8, ease: 'power3.out', stagger: 0.12 })
+        .from('.hero .lead', { opacity: 0, y: 14, duration: 0.5 }, '-=0.35');
+
+      // 十年：数字数出来
+      var numVal = document.getElementById('numVal');
+      var cnt = { v: 0 };
+      gsap.to(cnt, {
+        v: 10, duration: 1.1, ease: 'power2.out',
+        scrollTrigger: { trigger: '.years', start: 'top 75%', once: true },
+        onUpdate: function(){ numVal.textContent = Math.round(cnt.v); }
+      });
+
+      // 工序：三步跟着线依次浮现
+      gsap.from('.step', {
+        opacity: 0, y: 24, duration: 0.6, ease: 'power2.out', stagger: 0.15,
+        scrollTrigger: { trigger: '.steps', start: 'top 92%', once: true }
+      });
+
+      // 贴身：整块滑入（全页唯一一次）
+      gsap.from('#carryImg', {
+        opacity: 0, y: 36, duration: 0.7, ease: 'power2.out',
+        scrollTrigger: { trigger: '.carry', start: 'top 92%', once: true }
+      });
+
+      // 签名下的线：画出来
+      gsap.from('#sigLine', {
+        scaleX: 0, duration: 0.8, ease: 'power2.inOut',
+        scrollTrigger: { trigger: '.maker', start: 'top 88%', once: true }
+      });
+    });
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ buildThread(); });
+    var rT;
+    window.addEventListener('resize', function(){
+      clearTimeout(rT); rT = setTimeout(function(){ buildThread(); if (window.ScrollTrigger) ScrollTrigger.refresh(); }, 250);
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+  window.addEventListener('load', function(){
+    buildThread();
+    if (poster) setReveal(1);
+    else if (window.ScrollTrigger) ScrollTrigger.refresh();
+  });
+})();
+</script>
+</body>
+</html>
